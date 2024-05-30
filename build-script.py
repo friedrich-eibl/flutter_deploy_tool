@@ -1,8 +1,9 @@
 import sys
+import os
 from enum import Enum
 import pdb
 
-file_path = 'testpubspec.yaml'
+file_path = '../fitness_trainer/pubspec.yaml'
 
 Version = Enum('Version', ['MAJOR', 'MINOR', 'PATCH', 'BUILD'])
 version_default = Version.BUILD
@@ -54,7 +55,7 @@ def set_version(version_number: str):
 
         for i, line in enumerate(lines):
             if line.startswith('version:'):
-                lines[i] = 'version: ' + version_number
+                lines[i] = 'version: ' + version_number + '\n'
 
         with open(file_path, 'w') as file:
             file.writelines(lines)
@@ -73,24 +74,31 @@ def update_version_number(version_type: str):
 
 
 def build_appbundle ():
-    return
+    try:
+        if '/' in file_path:
+            root = file_path[:file_path.rfind('/')]
+            os.system(f'cd {root} && flutter build appbundle')
+            return
+        os.system('flutter build appbundle')
+    except Exception as e:
+        print(f'Error building appbundle: {e}')
 
 
 def parse_args() -> Version:
     if len(sys.argv) < 2: 
-        version_type = version_default
+        return version_default
     else:
         match sys.argv[1].lower():
             case 'major':
-                version_type = Version.MAJOR
+                return Version.MAJOR
             case 'minor':
-                version_type = Version.MINOR
+                return Version.MINOR
             case 'patch':
-                version_type = Version.PATCH
+                return Version.PATCH
             case 'build':
-                version_type = Version.BUILD
+                return Version.BUILD
             case _:
-                version_type = Version.BUILD
+                return Version.BUILD
 
 
 
