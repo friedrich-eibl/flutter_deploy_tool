@@ -11,6 +11,14 @@ Alternatively the Installation is also possible via pip package manager.
 ## Setup
 Adjust the .env file according to your needs
 
+'''yaml
+  PUB_SPEC_PATH = '<path to pubspec.yaml in project>'
+
+KEY_FILE = '<Path to Keyfile for >'
+PACKAGE_NAME = '<app package name>'
+BUNDLE = '<app bundle name>'
+'''
+
 ## Usage
 If you want to build and deploy your flutter project with just one command execute 
 `python build_and_deploy.py` and follow the instructions in the terminal.
