@@ -1,9 +1,12 @@
 import sys
 import os
+from dotenv import load_dotenv
 from enum import Enum
 import pdb
 
-file_path = '../fitness_trainer/pubspec.yaml'
+
+load_dotenv()
+file_path = os.environ['PUB_SPEC_PATH']
 
 Version = Enum('Version', ['MAJOR', 'MINOR', 'PATCH', 'BUILD'])
 version_default = Version.BUILD

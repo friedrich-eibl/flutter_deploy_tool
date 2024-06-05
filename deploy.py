@@ -1,23 +1,22 @@
 import os
+from dotenv import load_dotenv
 import google.auth
 from googleapiclient.discovery import build, Resource
 from google.oauth2 import service_account
 from googleapiclient.http import MediaFileUpload
 
+load_dotenv()
+KEY_FILE = os.environ['KEY_FILE']
+package_name = os.environ['PACKAGE_NAME']
+bundle = os.environ['BUNDLE']
 
 def connect_to_play_store() -> Resource:
-    KEY_FILE = 'testdevtools-424919-57bfe0c8a634.json'
     SCOPES = ['https://www.googleapis.com/auth/androidpublisher']
-
     credentials = service_account.Credentials.from_service_account_file(KEY_FILE, scopes=SCOPES)
-
     return build('androidpublisher', 'v3', credentials=credentials)
 
 
 def publish_to_play_store(service: Resource) -> None:
-    package_name = 'com.friedricheibl.trackntrain'
-    bundle = 'app-release.aab'
-
     # create edit
     edit = service.edits().insert(body={}, packageName=package_name).execute()
     edit_id = edit['id']
