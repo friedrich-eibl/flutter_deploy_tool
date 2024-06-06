@@ -9,15 +9,17 @@ Install by cloning this repository to a location of your choice `git clone https
 Alternatively the Installation is also possible via pip package manager.
 
 ## Setup
-Adjust the .env file according to your needs
+1. Create a service account in the GoogleCloud Console in order to be able to use the Google Play Developer API.
 
-'''yaml
-  PUB_SPEC_PATH = '<path to pubspec.yaml in project>'
+2. Add a .env file containing the following Values:
 
-KEY_FILE = '<Path to Keyfile for >'
+```dotenv
+PUB_SPEC_PATH = '<path to pubspec.yaml in project>'
+
+KEY_FILE = '<Path to Keyfile for Google Cloud Console>'
 PACKAGE_NAME = '<app package name>'
 BUNDLE = '<app bundle name>'
-'''
+```
 
 ## Usage
 If you want to build and deploy your flutter project with just one command execute 
